@@ -1,0 +1,113 @@
+#covid-table {
+    border: 5px solid;
+    width: 1000px;
+}
+
+th {
+    height: 5px;
+    font-size: 20px;
+    background-color: rgb(142, 177, 184) 
+}
+
+td {
+    text-align: center;
+    background-color: aliceblue;
+}
+
+th, td {
+    padding: 25px;
+    border: 1px solid;
+    font-size: 25px;
+    font-family:Georgia, 'Times New Roman', Times, serif
+}
+
+#table-section {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+h1 {
+    background-color: rgb(142, 177, 184);
+    text-align: center;
+}
+
+h2 {
+    font-size: 30px;
+    text-align: center;
+    font-family:Georgia, 'Times New Roman', Times, serif
+}
+
+h3 {
+    text-align: right;
+}
+
+h4 {
+    font-size: 30px;
+    text-align: left;
+    font-family:Georgia, 'Times New Roman', Times, serif
+
+}
+
+ul {
+    font-size: 25px;
+    font-family:Georgia, 'Times New Roman', Times, serif
+}
+
+#website-statement {
+    font-size: 20px;
+    font-family:Georgia, 'Times New Roman', Times, serif
+}
+#vaccine-statement {
+    font-size: 20px;
+    font-family:Georgia, 'Times New Roman', Times, serif
+}
+
+#vaccine-info {
+    font-size: 20px;
+    font-family:Georgia, 'Times New Roman', Times, serif
+}
+
+p {
+    font-size: 25px;
+    font-family:Georgia, 'Times New Roman', Times, serif
+}
+
+a {
+    font-size: 25px;
+    font-family:Georgia, 'Times New Roman', Times, serif
+}
+
+body {
+    background-color: lightblue;
+    margin-top: 70px;
+    margin-bottom: 70px;
+    margin-right: 70px;
+    margin-left: 70px;
+  }
+
+
+a:link {
+    color: blue;
+  }
+  
+  a:visited {
+    color: darkgreen;
+  }
+  
+  /* mouse over link */
+  a:hover {
+    color: purple;
+  }
+  
+  /* selected link */
+  a:active {
+    color: purple;
+  }
+
+/* #alert { */
+    /* padding: 20px; */
+    /* background-color: #f44336; */
+    /* color: white; */
+    /* margin-bottom: 15px; */
+ /* */ 

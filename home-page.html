@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang = "en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content = "width=device-width, initial-scale=1.0">
+        <title>Covid-19 Resources WA</title>
+        <link rel="stylesheet" href="style.css">
+
+    </head>
+    <header>
+        <!-- <div class="alert">
+            <span id="closebtn" onclick="this.parentElement.style.display='none';">×</span>
+            This is an alert box. </div>-->
+        <h1> Covid-19 in Washington State <h1>
+        <h3><a href = "vaccine-page.html">Vaccine Information</a></h3>
+    </header>
+    <body>
+        <main>
+        <section>
+            <h2>What is Covid-19 and How Does it Affect Us?</h2>
+            <ul>
+                <li>Covid-19 is a very contagious disease that is caused by the SARS-CoV-2 virus.</li>
+                <li>The virus affects many systems in the body, but mainly the respiratory system where it can be harder to breathe, get enough oxygen and where inflammation can accumulate and pnunomia can develop.</li>
+                <li>Some people can develop Long-Covid after infection, which can last weeks, months or years. Some symptoms include dizzyness, shortness of breath, chest pains as well as depression or anxiety.</li>
+                <li>People who are immunocomprimized such as those who have asthma or an autoimmune disease are at higher risk for getting more severe symtoms and endure a harder recovery from a COVID-19 infection. </li>
+            </ul>
+
+            <h2>What Can we do to Prevent the Spread?</h2>
+            <ul>
+                <li>Keeping up to date on vaccinations in your area when available is important. Since the first vaccine in 2021 there have been many updated vaccines from Pfizer-BioNTech and Moderna that reflect the new variations of COVID-19.</li>
+                <li>Washing your hands before touching your face, eating, and when you get home is one of the most effective ways to stop the spread of germs.</li>
+                <li>Wearing a mask in public places can prevent you from getting sick.</li>
+                <li>If you have been infected by COVID-19, following isolation and precaution guidelines from the CDC's website is reccomended so that you don't infect anyone else: <a href = "https://www.cdc.gov/coronavirus/2019-ncov/your-health/isolation.html"target="_blank">CDC Covid Guidelines</a> </li>
+            </ul>
+
+        <div id = table-section>
+            <h2>How Covid-19 Has Affected the Community</h2>
+            <ul>
+            <li>Below is a table representing Covid cases and deaths in Washington State from the 13th and 28th of every month between January 2020 and Febuary of 2021 using The Covid Tracking Project API from Public API's website.
+            <li>The selected dates show the progression of worsening Covid-19 cases and deaths over time. They indicate how important it is to learn about how it affects our community and how you can prevent the spread.</li>
+            </ul>
+
+            
+            
+            <table  id = "covid-table">
+                <thead>
+                    
+                    <tr>
+                        <th>Date</th>
+                        <th>Cases</th>
+                        <th>Deaths</th>
+                        
+                    </tr>
+                </thead>
+                <tbody id="table-body"></tbody>
+                <!-- <tr>
+                    <td>12</td>
+                    <td>13</td>
+                    <td>14</td>
+                </tr> -->
+            </table>
+        </div>
+        </section>
+        </main>
+
+
+        <script>
+            // javascript belongs in a script tag or seperate file
+            // api
+            // const apiUrl = "https://www.fruityvice.com/api/fruit/all";
+            const apiUrl = "https://api.covidtracking.com/v2/states/wa/daily/simple.json";
+            
+
+
+            async function makeApiCall() {
+
+                try {
+                    // const headers = {'Content-Type':'application/json',
+                    // 'Access-Control-Allow-Origin':'*',
+                    // 'Access-Control-Allow-Methods':'POST,PATCH,OPTIONS'}
+                    // ,
+                    //     header: {
+                        //         'Access-Control-Allow-Origin':'*',
+                        //     }}
+                        // );
+                    let response = await fetch(apiUrl);
+                    console.log(response.status);
+                    return await response.json();
+                }
+                catch(error) {
+                    console.log(error);
+                    return "error";
+                }
+            }
+            // make api call
+
+            async function showData() {
+                const responseData = await makeApiCall();
+                // console.log(responseData.data);
+                
+                // let text = "Hello world, welcome to the universe.";
+                // let result = text.includes("universe");
+                // console.log(result);
+
+
+
+                for (let index = responseData.data.length-1; index >= 0; index--) {
+
+                    if (responseData.data[index].date.includes("-13") || responseData.data[index].date.includes("-28")) 
+                    {
+                        const tableBody = document.getElementById('table-body');
+            
+                        const row = document.createElement("tr");
+                        
+                        const cellOne = document.createElement("td");
+                        cellOne.innerHTML = responseData.data[index].date;
+                        row.appendChild(cellOne);
+                        // cells are td's
+            
+                        const cellTwo = document.createElement('td');
+                        if (responseData.data[index].cases.total == null){
+                            cellTwo.innerHTML = 0;
+                        } else {
+                            cellTwo.innerHTML = responseData.data[index].cases.total;
+                        }
+                        row.appendChild(cellTwo);
+        
+                        const cellThree = document.createElement('td');
+                        if (responseData.data[index].outcomes.death.total == null) {
+                            cellThree.innerHTML = 0;
+                        }
+                        else {
+                            cellThree.innerHTML = responseData.data[index].outcomes.death.total;
+                        }
+                        
+                        row.appendChild(cellThree);
+                        
+                        tableBody.appendChild(row);
+
+                    }
+
+                    
+                    // console.log(data[index]);
+                    // console.log(index);
+                }
+                // console.log(data[0].date);
+                // console.log(data[3]);
+                // console.log(data)
+                // what do we use src with here?
+            }
+            showData()
+
+
+            
+
+            // const node = document.createElement("li");
+            // const textnode = document.createTextNode("Water");
+            // node.appendChild(textnode);
+            // document.getElementById("myList").appendChild(node);
+            // Use a form, table or li/ul to show the data and add infomation on vaccines, links for vaccines in the area, additional references 
+            // a form could let you choose to see the data from malaysia, but it could be befificial to make one thats just about general vaccines
+            // and be able to show data from multiple areas
+            // but how do I get the data to show in the form?
+
+            // I can make the form selectable to show the dates,
+            // theres alot of covid 19 data but not a lot of vaccine data
+
+
+        // btn.addEventListener('click', showDog)
+        </script>
+
+
+    </body>
+</html>
